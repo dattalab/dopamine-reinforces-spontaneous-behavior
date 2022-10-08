@@ -3,3 +3,9 @@
 *.pyc
 
 .ipynb_checkpoints
+
+*.egg-info
+
+.virtual_documents
+
+__pycache__
