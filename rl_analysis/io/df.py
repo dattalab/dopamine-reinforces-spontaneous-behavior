@@ -1,6 +1,7 @@
 import os
 import toml
 import numpy as np
+import pandas as pd
 from typing import Union
 from copy import deepcopy
 
@@ -77,3 +78,19 @@ def dlight_exclude_toml(
         }
 
     return use_dct
+
+
+def load_dlight_features(path, df_filter=None, win_left=0, win_right=0.3):
+    df = pd.read_parquet(path)
+            
+    if df_filter is not None:
+        df = df_filter(df)
+
+    df = df.query('@win_left == win_left & win_right == @win_right').copy()
+
+    dtype = dict(
+        is_feedback_any='uint8',
+        is_catch_any='uint8',
+    )
+
+    return df.astype(dtype)

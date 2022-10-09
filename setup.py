@@ -28,6 +28,7 @@ setup(
         "ipywidgets",
         "tbb",  # makes numba thread-safe
         "statsmodels",
+        "scikit-learn",
     ],
     entry_points={"console_scripts": ["rl-analysis = rl_analysis.cli:cli"]},
 )

@@ -93,6 +93,7 @@ photometry = [
 
 [intermediate_results]
 dlight_public = "/n/groups/datta/win/reinforcement-data/public-dataset/dlight_photometry_processed_full.parquet"
+features_public = "/n/groups/datta/win/reinforcement-data/public-dataset/dlight-chrimson_snippets_offline_features.parquet"
 dlight = "/home/markowitzmeister_gmail_com/jeff_win_share/reinforcement_data/_proc_photometry_dlight/"
 closed_loop_behavior = "/home/markowitzmeister_gmail_com/jeff_win_share/reinforcement_data/_proc_closed_loop_behavior/"
 rl_modeling = "/home/markowitzmeister_gmail_com/jeff_win_share/reinforcement_data/_proc_rl_modeling/"
