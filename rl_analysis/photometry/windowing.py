@@ -217,3 +217,46 @@ def window_trials_as_df(
         }
     )
     return agg_df, trial_df
+
+
+def window_trials_for_decoder(
+    data,
+    trial_indices,
+    signal_key,
+    syllable_key="predicted_syllable (offline)",
+    zscore_window=(-10, 10),
+    truncation_window=(-0.2, 1),
+    fps=30,
+    deriv_size=2,
+):
+
+    window = np.arange(fps * np.ptp(zscore_window))
+    window += zscore_window[0] * fps
+    window = np.int64(window)
+    time = window / fps
+
+    new_time = time[(time >= truncation_window[0]) & (time <= truncation_window[1])]
+
+    signal_matrix = _align_matrix(data[signal_key].to_numpy(), trial_indices, window, zscore=True)
+
+    _labels = get_syllables(data[syllable_key].to_numpy(), trial_indices, window)
+
+    inds = np.where((time >= truncation_window[0]) & (time <= truncation_window[-1]))[0]
+
+    deriv_matrix = signal_matrix[:, deriv_size:] - signal_matrix[:, :-deriv_size]
+    signal_matrix = signal_matrix[:, inds]
+    deriv_matrix = deriv_matrix[:, inds - deriv_size]
+
+    trial_df = pd.DataFrame(
+        signal_matrix,
+        columns=pd.Index(new_time, name="time"),
+        index=pd.Index(np.arange(len(signal_matrix)), name="trial"),
+    )
+    deriv_df = pd.DataFrame(
+        deriv_matrix,
+        columns=pd.Index(new_time, name="time"),
+        index=pd.Index(np.arange(len(deriv_matrix)), name="trial"),
+    )
+    trial_df = pd.concat([trial_df, deriv_df], axis=1)
+    trial_df["syllable"] = _labels
+    return trial_df
