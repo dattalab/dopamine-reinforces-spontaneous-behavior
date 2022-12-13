@@ -1,0 +1,1 @@
+Create a new conda environment: `conda create -n spont-da-win python=3.10`, activate this environment, and install this folder: `pip install -e /path/to/win` to run the notebooks used to create Winthrop's figure panels in "Spontaneous behavior is structured by reinforcement without explicit reward".
