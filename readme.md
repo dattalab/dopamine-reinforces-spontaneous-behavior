@@ -119,3 +119,4 @@ How to obtain data.
 # Troubleshooting
 
 1. If you get a `no space left on device error` during a long-running multi-processing calculation via Joblib this is likely due to `/dev/shm` filling up on a Linux system. A simple fix is to set `import tempfile; temp_folder=tempfile.gettempdir()` in your `Parallel` call. This can also be set via the `JOBLIB_TEMP_FOLDER` environment variable. In the bash environment you are running Jupyter from set `export JOBLIB_TEMP_FOLDER=/tmp`. Or in your notebook `import os; os.environ['JOBLIB_TEMP_FOLDER'] = '/tmp' `
+2. If your kernel dies while attempting to run `_reformat_zenodo_downloads.ipynb`, make sure you're running the notebook on a machine with at least 160GB of memory, as one of the data files (`optoda_raw_data/closed_loop_behavior_transfer.parquet`) uses that much memory to load. This preprocessing step reduces the amount of memory you need to run subsequent figure generating notebooks.
