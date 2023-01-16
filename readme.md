@@ -101,6 +101,7 @@ How to obtain data.
 			└── rl_modeling_dlight_data_online.parquet
 1. This contains everything you need to run the preprocessing and analysis notebooks.
 1. Specific data formats were used to reduce file size for storage on Zenodo (brotli compression level 9). You will want to convert these files into formats that enable fast processing (snappy-compressed). This is done by running `_reformat_zenodo_downloads.ipynb`.
+1. All datasets that end in `.tar.gz` should be decompressed into the same folder before running the figure-generating notebooks. I.e., `tar -xvf dlight_intermediate_results/dlight-food-peaks.p.tar.gz`
 
 <br><br>
 
