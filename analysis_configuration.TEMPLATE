@@ -47,7 +47,7 @@ closed_loop_behavior = "/BASEDIR/optoda_raw_data/"
 realtime_package = "/BASEDIR/realtime_package/"
 hek_cells = "/BASEDIR/hek_raw_data/"
 misc = "/BASEDIR/misc_raw_data/"
-keypoints = "/BASEDIR/keypoints_data/"
+keypoints = "/BASEDIR/keypoints_raw_data/"
 
 
 [intermediate_results]
