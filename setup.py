@@ -1,0 +1,47 @@
+from setuptools import find_packages, setup
+
+setup(
+    name="rl_analysis",
+    packages=find_packages(),
+    version="1.0.0",
+    platforms=["mac", "unix"],
+    description='Python package and notebooks corresponding to "Spontaneous behavior is structured by reinforcement without explicit reward"',
+    author="wingillis, jmarkow, neurojaym",
+    license="",
+    install_requires=[
+        "black",
+        "cmocean",
+        "pandas==1.5.0",
+        "opencv-python-headless",
+        "numpy==1.21.5",
+        "click",
+        "toolz",
+        "h5py",
+        "natsort",
+        "networkx",
+        "numexpr==2.8.1",
+        "dask[complete]<=2022.04.0", # dask is picky
+        #"dask_jobqueue==0.7.3",
+        "dask_jobqueue",
+        "tornado==6.2",
+        "bokeh<3", # for dask dashboard
+        "multiprocess",
+        "tqdm",
+        "matplotlib",
+        "seaborn",
+        "pyarrow",
+        "numpyro",
+        "jax",
+        "optax",
+        "colorcet",
+        "toml",
+        "numba",
+        "joblib",
+        "scipy",
+        "ipywidgets",
+        "tbb",  # makes numba thread-safe
+        "statsmodels",
+        "scikit-learn",
+    ],
+    entry_points={"console_scripts": ["rl-analysis = rl_analysis.cli:cli"]},
+)

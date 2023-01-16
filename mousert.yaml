@@ -1,0 +1,27 @@
+# prereqs: build-essential (on ubuntu run sudo apt install build-essential)
+# run: conda env create --file mousert.yaml
+name: mouse-rt-simulate
+channels:
+    - conda-forge
+dependencies:
+    - python==3.7.13
+    - requests
+    - future
+    - numpy
+    - cython
+    - ipywidgets
+    - pip
+    - pip:
+          - "pyhsmm @ git+https://github.com/mattjj/pyhsmm.git@master"
+          - "pybasicbayes @ git+https://github.com/mattjj/pybasicbayes.git@master"
+          - "autoregressive @ git+https://github.com/dattalab/pyhsmm-autoregressive.git@master"
+          - "mouse-rt @ git+https://github.com/dattalab/mouse-rt@master"
+          - ipykernel
+          - seaborn
+          - pandas==1.3.5
+          - matplotlib
+          - joblib
+          - tqdm
+          - toml
+          - pyarrow
+          - scipy

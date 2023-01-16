@@ -1,0 +1,337 @@
+# DATA_DIRS IS NO LONGER USED, LEFT FOR HISTORICAL REASONS
+[data_dirs]
+root = "/home/markowitzmeister_gmail_com/jeff_win_share/reinforcement_data" # root directory
+reinforcement = [
+	"_aggregate_results_arhmm_03",
+	"_aggregate_results_arhmm_04",
+	"_aggregate_results_arhmm_05",
+	"_aggregate_results_arhmm_06",
+	"_aggregate_results_arhmm_07",
+	"_aggregate_results_arhmm_08",
+	"_aggregate_results_arhmm_09",
+#	"_aggregate_results_arhmm_10",
+	"_aggregate_results_arhmm_11",
+#	"_aggregate_results_arhmm_12",
+]
+reinforcement_photometry = [
+	"_aggregate_results_arhmm_photometry_02/",
+	"_aggregate_results_arhmm_photometry_03/",
+]
+reinforcement_scalar = [
+	"_aggregate_results_arhmm_scalar_01/",
+	"_aggregate_results_arhmm_scalar_03/",
+]
+excitation = [
+	"_aggregate_results_arhmm_excitation_01/",
+	"_aggregate_results_arhmm_excitation_02/",
+	"_aggregate_results_arhmm_excitation_03/",
+#	"_aggregate_results_arhmm_excitation_04/",
+]
+excitation_photometry = ["_aggregate_results_arhmm_photometry_excitation_02/"]
+excitation_pulsed = ["_aggregate_results_arhmm_excitation_pulsed_01/"]
+excitation_pulsed_photometry = [
+	"_aggregate_results_arhmm_photometry_excitation_pulsed_01/",
+]
+photometry = [
+	"_aggregate_results_arhmm_photometry_06/",
+	"_aggregate_results_arhmm_photometry_07/",
+	"_aggregate_results_arhmm_photometry_08/",
+]
+
+# REPLACE BASEDIR WITH WHERE YOU DOWNLOAD DATA -
+# ALTERNATIVELY USE _reformat_zenodo_download.ipynb TO REPLACE BASEDIR PROGRAMATICALLY
+[raw_data]
+dlight = "/BASEDIR/dlight_raw_data/"
+rl_modeling = "/BASEDIR/rl_raw_data/"
+closed_loop_behavior = "/BASEDIR/optoda_raw_data/"
+realtime_package = "/BASEDIR/realtime_package/"
+hek_cells = "/BASEDIR/hek_raw_data/"
+misc = "/BASEDIR/misc_raw_data/"
+keypoints = "/BASEDIR/keypoints_data/"
+
+
+[intermediate_results]
+dlight = "/BASEDIR/dlight_intermediate_results/"
+closed_loop_behavior = "/BASEDIR/optoda_intermediate_results/"
+rl_modeling = "/BASEDIR/rl_intermediate_results/"
+misc = "/BASEDIR/misc_intermediate_results/"
+hek_cells = "/BASEDIR/hek_intermediate_results/"
+
+
+[figures]
+store_dir = "/BASEDIR/panels/"
+
+
+[common]
+fs = 30.0
+missing_frame_cutoff = 0.05
+largest_gap_cutoff = 300
+last_timestamp_cutoff = 1750
+first_timestamp_cutoff = 180
+
+
+[dlight_common]
+dff_threshold = 1.5
+dlight_reference_corr_threshold = 0.6
+
+[dlight_snippet]
+dataframe_filename = "_jeff-cache/merged_feedback_dataframe_debounce11.parquet" # NO LONGER USED
+scalars.hampel_filter.threshold = 10.0
+reference.filter.corner_fs = 3.0
+reference.filter.order = 2
+rolling_z.window = 600
+rolling_z.min_periods = 30
+rolling_z.center = true
+# HERE YOU WILL WANT TO RUN MULTIPLE TIMES
+snippet_grab.window_bounds = [-3, 3] # short window
+# snippet_grab.window_bounds = [-10, 10] # long window, save appended to longwin
+# snippet_grab.gb_key = "uuid"
+snippet_grab.label_key = "predicted_syllable" # online 
+# snippet_grab.label_key= "predicted_syllable (offline)" # offline
+# snippet_grab.label_key = "movement_initiations" # movement initiations
+# LONG WINDOW KEYS, USE THESE KEYS FOR [-10, 10]
+# data_keys = [
+# 	"signal_reref_dff",
+# 	"signal_reref_dff_z",
+# 	"velocity_2d_mm",
+# 	"height_ave_mm",
+# 	"feedback_status",
+# 	"acceleration_2d_mm",
+# 	"jerk_2d_mm",
+# 	"angle",
+# 	"angle_unwrapped",
+# 	"velocity_angle",
+# 	"velocity_height",
+# 	"timestamp",
+# ]
+# SHORT WINDOW KEYS, USE THESE KEYS FOR [-3, 3]
+data_keys = [
+	"signal_reref_dff",
+	"signal_reref_dff_z",	
+	"velocity_2d_mm",
+	"height_ave_mm",
+	"centroid_x_mm",
+	"centroid_y_mm",
+	"feedback_status",
+	"acceleration_2d_mm",
+	"jerk_2d_mm",
+	"angle",
+	"angle_unwrapped",
+	"velocity_angle",
+	"velocity_height",
+	"pc00",
+	"pc01",
+	"pc02",
+	"pc03",
+	"pc04",
+	"pc05",
+	"pc06",
+	"pc07",
+	"pc08",
+	"pc09",
+	"timestamp",
+]
+meta_keys = [
+	"uuid",
+	"mouse_id",
+	"session_number",
+	"target_syllable",
+	"stim_duration",
+	"date",
+	"trial_count",
+	"opsin",
+	"area",
+]
+convs.target_syllable = "int16"
+convs.session_number = "int8"
+convs.signal_reference_corr = "float32"
+convs.signal_max = "float32"
+convs.reference_max = "float32"
+convs.uuid = "category"
+convs.mouse_id = "category"
+convs.area = "category"
+
+[dlight_basic_analysis]
+scalars = [
+	"velocity_2d_mm",
+	"acceleration_2d_mm",
+	"jerk_2d_mm",
+	"velocity_angle",
+	"velocity_height",
+]
+timescale_correlation.bins = [0.25, 60.1, 0.5]
+timescale_correlation.nshuffles = 1000
+dlight_key = "signal_reref_dff_z"
+
+[dlight_regression]
+scalars = [
+	"velocity_2d_mm",
+	"acceleration_2d_mm",
+	"velocity_angle",
+	"velocity_height",
+]
+
+[dlight_transition_features]
+use_offline = true # run feature computation once set to true and once set to false
+renormalize = false
+pre_window = [-0.5, 5.0]
+windows = [
+	[
+		-0.2,
+		0.3,
+	],
+	[
+		-0.1,
+		0.4,
+	],
+	[
+		-0.3,
+		0.3,
+	],
+	[
+		0.0,
+		0.5,
+	],
+	[
+		0.0,
+		0.3,
+	],
+	[
+		0.0,
+		0.6,
+	],
+	[
+		0.0,
+		1.0,
+	],
+	[
+		0.0,
+		inf,
+	],
+]
+# scalars included along with the features
+scalars = [
+	"velocity_2d_mm",
+	"acceleration_2d_mm",
+	"jerk_2d_mm",
+	"velocity_angle",
+	"velocity_height",
+	"centroid_x_mm",
+	"centroid_y_mm",
+]
+# metadata included in the features
+meta_keys = [
+	"uuid",
+	"timestamp",
+	"syllable",
+	"mouse_id",
+	"session_number",
+	"stim_duration",
+	"duration",
+	"target_syllable",
+	"signal_max",
+	"reference_max",
+	"signal_reference_corr",
+	"date",
+	"area",
+	"opsin",
+]
+# channels to compute features over
+proc_keys = [
+	"signal_reref_dff_z",
+]
+
+[dlight_encoding_features]
+label_key = "predicted_syllable (offline)"
+window_sizes = [5, 10, 25, 50, 100, 200, 300, 400, 800, 1600]
+average_variant.bins = [5, 10, 25, 50, 100, 200, 300, 400, 800, 1600]
+
+[dlight_lagged_correlations]
+nshuffles = 1000
+use_offline = true
+use_renormalized = false
+estimate_within_bin = true
+use_neural_features = [
+	"signal_reref_dff_z_max",
+]
+use_windows = ["(0.0, 0.3)"] # what we're using in paper
+
+correlation_method = "pandas"
+correlation_kwargs.method = "pearson"
+usage_and_scalars.bins = [10, 400, 20]
+usage_and_scalars.scalars = [
+	"velocity_2d_mm",
+]
+usage_and_scalars.correlation_keys = ["syllable", "mouse_id", "bin"]
+entropy.bins = [5, 52, 5]
+entropy.ndlight_bins = 10 # bin dlight then aggregate tm stats
+entropy.dlight_bin_keys = [
+	"mouse_id",
+	"syllable",
+] # compute dlight bin cutoffs over these keys
+entropy.pre_agg_keys = [
+	"uuid",
+	"mouse_id",
+	"bin",
+	"dlight_bin_feature",
+	"dlight_bin",
+] # this first aggregate just reduces data size
+entropy.agg_keys = [
+	"mouse_id",
+	"bin",
+	"dlight_bin_feature",
+	"dlight_bin",
+] # compute entropy with these keys, last key is chopped off and used in correlation
+entropy.correlation_keys = [
+	"dlight_bin_feature",
+	"bin",
+] # final groupby, then correlation is averaged
+entropy.corr_kwargs.method = "spearman"
+entropy.tm_truncate = 36
+clustering.nclusters = 4
+clustering.bin_size = 60
+clustering.use_features = [
+	"velocity_2d_mm",
+	"acceleration_2d_mm",
+	"jerk_2d_mm",
+	"velocity_angle",
+	"velocity_height",
+]
+clustering.display_features = [
+	"velocity_2d_mm",
+	"acceleration_2d_mm",
+	"jerk_2d_mm",
+	"velocity_angle",
+	"velocity_height",
+]
+usage_and_scalars_shifted.bins = [10]
+stim.use_windows = ["(0.0, 0.6)", "(0.0, 1.0)"]
+stim.estimate_within_bin = true
+
+
+[closed_loop_behavior]
+partition_cols = ["experiment_type", "area", "mouse_id"]
+dataframe_filename = "_jeff-cache/feedback_dataframe_debounce11.parquet" # not used, left for historical reasons
+learning_timecourse.bin_size = 30
+learning_timecourse.bin_overlap = 0
+learning_timecourse.baseline = "m"
+learning_timecourse.meta_keys = [
+	"mouse_id",
+	"session_number",
+	"syllable_group",
+	"target_syllable",
+	"stim_duration",
+	"area (pooled)",
+	"experiment_type",
+	"area",
+	"genotype",
+	"uuid",
+	"date",
+	"opsin",
+	"power",
+	"sex",
+	"cohort",
+]
+
+[dask]
+# address = "tcp://10.10.0.21:35679" # only uncomment if you are going to use a dask scheduler for long-running computations

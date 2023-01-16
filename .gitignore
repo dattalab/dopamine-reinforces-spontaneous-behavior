@@ -1,7 +1,7 @@
 .vscode
-
+*dask*
 *.pyc
-
+*.out
 .ipynb_checkpoints
 
 *.egg-info
@@ -9,3 +9,5 @@
 .virtual_documents
 
 __pycache__
+
+analysis_configuration_reformatted.toml

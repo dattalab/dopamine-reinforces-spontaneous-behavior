@@ -1,0 +1,17 @@
+# run: conda env create --file hekcell.yml
+name: hekcell
+channels:
+    - conda-forge
+dependencies:
+    - python==3.10
+    - ipywidgets
+    - pip
+    - pip:
+          - cellpose==1.0.2
+          - scikit-image
+          - imagecodecs
+          - ipykernel
+          - seaborn
+          - matplotlib
+          - tqdm
+          - toml
