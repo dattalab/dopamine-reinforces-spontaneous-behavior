@@ -103,8 +103,8 @@ How to obtain data.
 1. Specific data formats were used to reduce file size for storage on Zenodo (brotli compression level 9). You will want to convert these files into formats that enable fast processing (snappy-compressed). This is done by running `_reformat_zenodo_downloads.ipynb`.
 1. Some files and folders have been compressed as tarballs. Prior to running any other notebooks run the following **from the directory where you downloaded the dataset**. 
 
-		find . -type f -not -name *.p.tar.gz -name *.tar.gz -execdir tar -xvf {} \;
-		find . -type f -name "*.p.tar.gz" -exec tar -xvf {} \;
+		find . -type f -name *.tar.gz -execdir tar -xvf {} \;
+
 
 <br><br>
 
