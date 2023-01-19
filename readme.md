@@ -1,5 +1,7 @@
 # Spontaneous behaviour is structured by reinforcement without explicit reward
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7274803.svg)](https://doi.org/10.5281/zenodo.7274803)
+
 ## Authors
 Jeffrey E. Markowitz<sup>*1,7</sup>, Winthrop Gillis<sup>*1</sup>, Maya Jay<sup>*1</sup>, Jeffrey Wood<sup>1</sup>, Ryley Harris<sup>1</sup>, Robert Cieszkowski<sup>1</sup>, Rebecca Scott<sup>1</sup>, David Brann<sup>1</sup>, Dorothy Koveal<sup>1</sup>, Tomasz Kula<sup>1</sup>, Caleb Weinreb<sup>1</sup>, Mohammed Abdal Monium Osman<sup>1</sup>, Sandra Romero Pinto<sup>2,3</sup>, Naoshige Uchida<sup>2,3</sup>, Scott W. Linderman<sup>4,5</sup>, Bernardo L. Sabatini<sup>1,6</sup>, Sandeep Robert Datta<sup>1,#</sup>
 
@@ -55,7 +57,7 @@ Installation instructions
 
 How to obtain data.
 
-1. Download data from Zenodo here **INSERT ZENODO BADGE POST-RELEASE**. You should see the following.
+1. Download data from Zenodo here [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7274803.svg)](https://doi.org/10.5281/zenodo.7274803). You should see the following.
 
 		.
 		├── dlight_intermediate_results
@@ -124,3 +126,4 @@ How to obtain data.
 
 1. If you get a `no space left on device error` during a long-running multi-processing calculation via Joblib this is likely due to `/dev/shm` filling up on a Linux system. A simple fix is to set `import tempfile; temp_folder=tempfile.gettempdir()` in your `Parallel` call. This can also be set via the `JOBLIB_TEMP_FOLDER` environment variable. In the bash environment you are running Jupyter from set `export JOBLIB_TEMP_FOLDER=/tmp`. Or in your notebook `import os; os.environ['JOBLIB_TEMP_FOLDER'] = '/tmp' `
 2. If your kernel dies while attempting to run `_reformat_zenodo_downloads.ipynb`, make sure you're running the notebook on a machine with at least 160GB of memory, as one of the data files (`optoda_raw_data/closed_loop_behavior_transfer.parquet`) uses that much memory to load. This preprocessing step reduces the amount of memory you need to run many of the subsequent figure generating notebooks. However, there may be a few notebooks that require more memory.
+3. Please submit an issue if you experience problems running the code.
